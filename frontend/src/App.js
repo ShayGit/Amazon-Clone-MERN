@@ -23,7 +23,7 @@ function App() {
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
-        <footer class="row center">All Rights Reserved</footer>
+        <footer className="row center">All Rights Reserved</footer>
       </div>
     </BrowserRouter>
   );
