@@ -27,3 +27,4 @@ frontend/.env
 backend/config/keys.js
 backend/config/prod.js
 backend/config/dev.js
+backend/.env

@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import userRoutes from './routes/userRoutes.js';
 
 const app = express();
-mongoose.connect(process.env.MONGOURI || 'mongodb+srv://admin:KcsPiz15r6MHUXsz@cluster0.oezaw.mongodb.net/amazonclone?retryWrites=true&w=majority',{
+mongoose.connect(process.env.MONGOURI,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
