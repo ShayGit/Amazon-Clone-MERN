@@ -24,3 +24,6 @@ yarn-error.log*
 frontend/package-lock.json
 package-lock.json
 frontend/.env
+backend/config/keys.js
+backend/config/prod.js
+backend/config/dev.js
