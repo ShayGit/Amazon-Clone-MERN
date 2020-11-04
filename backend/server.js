@@ -1,10 +1,16 @@
+import dotenv from 'dotenv'
 import express from "express";
 import mongoose from "mongoose";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
+dotenv.config();
+
 const app = express();
-mongoose.connect(process.env.MONGOURI , {
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+mongoose.connect(process.env.MONGOURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
