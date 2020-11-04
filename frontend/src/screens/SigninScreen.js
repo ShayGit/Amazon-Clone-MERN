@@ -1,21 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from '../components/MessageBox';
+import { signin } from "../actions/userActions";
 
-export default function SigninScreen() {
+export default function SigninScreen(props) {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
-
+    const dispatch = useDispatch();
     const submitHandler = (e) => {
         e.preventDefault();
+        
+        dispatch(signin(email,password))
     }
-  return (
+
+    const redirect = props.location.search? props.location.search.split('=')[1]
+    : '/';
+
+    const userSignin = useSelector((state) => state.userSignin);
+  const {userInfo, loading, error} = userSignin;
+
+  useEffect(() =>{
+    if(userInfo){
+        props.history.push(redirect);
+    }
+  },[props.history, redirect, userInfo])
+    return (
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Sign In</h1>
         </div>
+        {loading && <LoadingBox/>}
+        
         <div>
           <label htmlFor="email">Email address: </label>
           <input
@@ -23,7 +43,9 @@ export default function SigninScreen() {
             id="email"
             placeholder="Enter email"
             required
-            onchange={(e) => setEmail(e.target.value)}
+            value={email}
+
+            onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div>
@@ -34,9 +56,10 @@ export default function SigninScreen() {
             placeholder="Enter password"
             required
             value={password}
-            onchange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
           <label />
           <button className="primary" type="submit">
