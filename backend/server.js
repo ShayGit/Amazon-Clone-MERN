@@ -1,51 +1,34 @@
-import data from './data.js';
-import express from 'express';
-import mongoose from 'mongoose'
-import userRoutes from './routes/userRoutes.js';
+import express from "express";
+import mongoose from "mongoose";
+import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
-mongoose.connect(process.env.MONGOURI,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
+mongoose.connect(process.env.MONGOURI , {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
 });
-mongoose.connection.on('connected', ()=> {
-    console.log('connected to mongo');
-})
-
-mongoose.connection.on('error', (err)=> {
-    console.log('error connecting',err);
-})
-
-app.get('/', (req, res) => {
-    res.send("Server is ready");
+mongoose.connection.on("connected", () => {
+  console.log("connected to mongo");
 });
 
-app.get('/api/products', (req, res) => {
-    res.send(data.products);
+mongoose.connection.on("error", (err) => {
+  console.log("error connecting", err);
 });
 
-app.get('/api/products/:id', (req, res) => {
-    const productId = req.params.id;
-    const product = data.products.find((x)=> x._id === productId);
-    if(product){
-        res.send(product);
-    }
-    else{
-        res.status(404).send({message: 'Product not Found'})
-    }
-    res.send(data.products);
+app.get("/", (req, res) => {
+  res.send("Server is ready");
 });
 
+app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
-app.use('/api/users', userRoutes);
-
-
-app.use((err,req,res,next)=>{
-    res.status(500).send({message: err.message})
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
 });
 
-const port = process.env.PORT || 5000
-app.listen(port, ()=> {
-    console.log(`Serve at http://localhost:${port}`);
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Serve at http://localhost:${port}`);
 });
