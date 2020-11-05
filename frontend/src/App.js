@@ -6,6 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import React from "react";
 import SigninScreen from "./screens/SigninScreen";
+import SignupScreen from "./screens/SignupScreen";
 import { signout } from "./actions/userActions";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   const signoutHandler = () => {
     dispatch(signout());
   };
+  console.log('userInfo', userInfo, 'cartItems',cartItems)
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -54,6 +56,7 @@ function App() {
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/signin" component={SigninScreen} />
+          <Route path="/signup" component={SignupScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
         <footer className="row center">All Rights Reserved</footer>
