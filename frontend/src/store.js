@@ -22,6 +22,7 @@ const initialState = {
       ? JSON.parse(localStorage.getItem("shippingAddress"))
       : {},
     paymentMethod: "PayPal",
+    summary: {}
   },
 };
 

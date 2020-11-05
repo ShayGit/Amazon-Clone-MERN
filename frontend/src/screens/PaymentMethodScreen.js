@@ -18,6 +18,12 @@ export default function PaymentMethodScreen(props) {
         props.history.push('/signin?redirect=payment');
 
     }
+    const { cartItems } = cart;
+    if(!cartItems.length)
+    {
+        props.history.push('/cart');
+
+    }
     const dispatch = useDispatch();
     const submitHandler = (e) => {
         e.preventDefault();

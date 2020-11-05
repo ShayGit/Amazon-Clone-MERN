@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS, CART_SET_SUMMARY } from "../constants/cartConstants";
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
@@ -11,15 +11,17 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           cartItems: state.cartItems.map((x) =>
             x.product === existItem.product ? item : x
           ),
+          summary: {}
         };
       } else {
-        return { ...state, cartItems: [...state.cartItems, item] };
+        return { ...state, cartItems: [...state.cartItems, item], summary: {} };
       }
     }
     case CART_REMOVE_ITEM: {
       return {
         ...state,
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+        summary: {}
       };
     }
     case CART_SAVE_SHIPPING_ADDRESS: {
@@ -32,6 +34,12 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       return {
         ...state,
         paymentMethod: action.payload
+      };
+    }
+    case CART_SET_SUMMARY: {
+      return {
+        ...state,
+        summary: action.payload
       };
     }
     default:

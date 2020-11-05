@@ -9,9 +9,16 @@ export default function ShippingAddressScreen(props) {
     const {userInfo} = userSignin;
     const cart = useSelector(state => state.cart);
     const {shippingAddress} = cart;
+    
     if(!userInfo)
     {
         props.history.push('/signin?redirect=shipping');
+
+    }
+    const { cartItems } = cart;
+    if(!cartItems.length)
+    {
+        props.history.push('/cart');
 
     }
   const [fullName, setFullName] = useState(shippingAddress.fullName);
