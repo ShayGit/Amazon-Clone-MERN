@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import express from "express";
 import mongoose from "mongoose";
+import orderRoutes from './routes/orderRoutes.js';
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
