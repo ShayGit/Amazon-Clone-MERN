@@ -17,7 +17,11 @@ export default function OrderScreen(props) {
 
   const orderPay = useSelector(state => state.orderPay);
   const {loading: loadingPay, error: errorPay, success: successPay} = orderPay;
-
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  if (!userInfo) {
+    props.history.push("/signin");
+  }
   const orderId = props.match.params.id;
   useEffect(() => {
       const addPayPalScript = async()=> {

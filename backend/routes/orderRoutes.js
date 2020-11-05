@@ -5,6 +5,22 @@ import { isAuth } from "../utils.js";
 
 const orderRoutes = express.Router();
 
+
+orderRoutes.get(
+  "/purchasehistory",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+      const orders = await Order.find({user: req.user._id});
+      if(orders)
+      {
+        res.send(orders)
+      }
+      else {
+        res.status(404).send({ message: "Orders not found" });
+      }
+  })
+);
+
 orderRoutes.post(
   "/",
   isAuth,

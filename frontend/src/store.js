@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
-import { orderCreateReducer, orderDetailsReducer, orderPayReducer } from "./reducers/orderReducer";
+import { orderCreateReducer, orderDetailsReducer, orderPayReducer, purchaseHistoryReducer } from "./reducers/orderReducer";
 import {
   productDetailsReducer,
   productListReducer,
@@ -35,7 +35,8 @@ const reducer = combineReducers({
   userSignup: userSignupReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
-  orderPay: orderPayReducer
+  orderPay: orderPayReducer,
+  purchaseHistory: purchaseHistoryReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

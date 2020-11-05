@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route } from "react-router-dom";
+import { BrowserRouter, Link, Redirect, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import CartScreen from "./screens/CartScreen";
@@ -7,6 +7,7 @@ import OrderScreen from "./screens/OrderScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import ProductScreen from "./screens/ProductScreen";
+import PurchaseHistoryScreen from "./screens/PurchaseHistoryScreen";
 import React from "react";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
@@ -45,9 +46,14 @@ function App() {
                   {userInfo.name} <i className="fa fa-caret-down" />
                 </Link>
                 <ul className="dropdown-content">
-                  <Link to="#signout" onClick={signoutHandler}>
-                    Sign out
-                  </Link>
+                  <li>
+                    <Link to={"/purchasehistory"}>Purchase History</Link>
+                  </li>
+                  <li>
+                    <Link to="#signout" onClick={signoutHandler}>
+                      Sign out
+                    </Link>
+                  </li>
                 </ul>
               </div>
             ) : (
@@ -60,10 +66,13 @@ function App() {
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/signin" component={SigninScreen} />
           <Route path="/signup" component={SignupScreen} />
+
           <Route path="/shipping" component={ShippingAddressScreen} />
           <Route path="/payment" component={PaymentMethodScreen} />
           <Route path="/placeorder" component={PlaceOrderScreen} />
           <Route path="/order/:id" component={OrderScreen} />
+          <Route path="/purchasehistory" component={PurchaseHistoryScreen} />
+
           <Route path="/" component={HomeScreen} exact />
         </main>
         <footer className="row center">All Rights Reserved</footer>
