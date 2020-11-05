@@ -3,9 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Link } from "react-router-dom";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import { createOrder } from "../actions/orderActions";
 import { setCartSummary } from "../actions/cartActions";
 
 export default function PlaceOrderScreen(props) {
+    const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   if (!cart.paymentMethod) {
     props.history.push("/payment");
@@ -19,13 +24,23 @@ export default function PlaceOrderScreen(props) {
   if (!userInfo) {
     props.history.push("/signin?redirect=placeorder");
   }
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { loading, success, error, order } = orderCreate;
+  
+  useEffect(() => {
+    if(success){
+        props.history.push(`/order/${order._id}`);
+        dispatch({type: ORDER_CREATE_RESET});
+    }
+  },[dispatch, order, props.history, success])
+
+ 
 
   const toPrice = (num) => Number(num.toFixed(2));
 
-  const {summary} = cart;
-  const dispatch = useDispatch();
+  const { summary } = cart;
+ 
   useEffect(() => {
-      console.log(summary)
     if (!summary.totalPrice) {
       const itemsPrice = toPrice(
         cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
@@ -33,11 +48,15 @@ export default function PlaceOrderScreen(props) {
       const shippingPrice = itemsPrice > 100 ? toPrice(0) : toPrice(10);
       const taxPrice = toPrice(0.15 * itemsPrice);
       const totalPrice = itemsPrice + shippingPrice + taxPrice;
-      dispatch(setCartSummary({itemsPrice,shippingPrice,taxPrice,totalPrice}));
+      dispatch(
+        setCartSummary({ itemsPrice, shippingPrice, taxPrice, totalPrice })
+      );
     }
-  }, [cart.cartItems, cart.summary, dispatch]);
+  }, [cart.cartItems, cart.summary, dispatch, summary]);
 
-  const placeOrderHandler = () => {};
+  const placeOrderHandler = () => {
+    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+  };
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4 />
@@ -140,6 +159,8 @@ export default function PlaceOrderScreen(props) {
                   Place Order
                 </button>
               </li>
+              {loading && <LoadingBox/>}
+              {error && <MessageBox variant='danger'>{error}</MessageBox>}
             </ul>
           </div>
         </div>

@@ -22,7 +22,6 @@ function App() {
   const signoutHandler = () => {
     dispatch(signout());
   };
-  console.log('userInfo', userInfo, 'cartItems',cartItems)
   return (
     <BrowserRouter>
       <div className="grid-container">

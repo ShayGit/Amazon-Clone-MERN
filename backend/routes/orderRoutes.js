@@ -22,6 +22,7 @@ orderRoutes.post(
         totalPrice: req.body.summary.totalPrice,
         user: req.user._id,
       });
+      
       const createdOrder = await order.save();
       res
         .status(201)
