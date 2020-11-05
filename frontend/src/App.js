@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import CartScreen from "./screens/CartScreen";
 import HomeScreen from "./screens/HomeScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import ProductScreen from "./screens/ProductScreen";
 import React from "react";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
@@ -59,6 +60,7 @@ function App() {
           <Route path="/signin" component={SigninScreen} />
           <Route path="/signup" component={SignupScreen} />
           <Route path="/shipping" component={ShippingAddressScreen} />
+          <Route path="/payment" component={PaymentMethodScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
         <footer className="row center">All Rights Reserved</footer>
