@@ -46,7 +46,7 @@ userRoutes.post(
       password: bcrypt.hashSync(req.body.password, 8),
     });
     const createdUser = await user.save();
-  
+
     res.send({
       _id: createdUser._id,
       name: createdUser.name,
@@ -54,6 +54,18 @@ userRoutes.post(
       isAdmin: createdUser.isAdmin,
       token: generateToken(createdUser),
     });
+  })
+);
+
+userRoutes.get(
+  "/:id",
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      res.send(user);
+    } else {
+      res.status(404).send({ message: "User Not Found" });
+    }
   })
 );
 
