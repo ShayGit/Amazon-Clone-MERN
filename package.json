@@ -2,9 +2,10 @@
   "name": "amazon-clone",
   "type": "module",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "Ecommerce Amazon Clone - MongoDB, React.js, Express.js",
   "main": "index.js",
   "scripts": {
+    "build": "cd frontend && npm install && npm run build",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "author": "",
