@@ -48,7 +48,7 @@ function App() {
                   {userInfo.name} <i className="fa fa-caret-down" />
                 </Link>
                 <ul className="dropdown-content">
-                <li>
+                  <li>
                     <Link to={"/profile"}>My Profile</Link>
                   </li>
                   <li>
@@ -64,6 +64,27 @@ function App() {
             ) : (
               <Link to="/signin">Sign in</Link>
             )}
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <Link to="#admin" onClick={signoutHandler}>
+                  Admin <i className="fa fa-caret-down" />
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/productlist">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist">Orders</Link>
+                  </li>
+                  <li>
+                    <Link to="/userlist">Users</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </header>
         <main>
@@ -76,7 +97,10 @@ function App() {
           <Route path="/payment" component={PaymentMethodScreen} />
           <Route path="/placeorder" component={PlaceOrderScreen} />
           <PrivateRoute path="/order/:id" component={OrderScreen} />
-          <PrivateRoute path="/purchasehistory" component={PurchaseHistoryScreen} />
+          <PrivateRoute
+            path="/purchasehistory"
+            component={PurchaseHistoryScreen}
+          />
           <PrivateRoute path="/profile" component={ProfileScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
