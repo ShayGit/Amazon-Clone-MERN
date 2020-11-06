@@ -8,12 +8,8 @@ import { listPurchaseHistory } from "../actions/orderActions";
 export default function PurchaseHistoryScreen(props) {
   const purchaseHistory = useSelector((state) => state.purchaseHistory);
   const { loading, error, orders } = purchaseHistory;
-
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-  if (!userInfo) {
-    props.history.push("/signin");
-  }
+ 
+ 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listPurchaseHistory())

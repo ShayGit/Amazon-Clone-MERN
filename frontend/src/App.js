@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Redirect, Route } from "react-router-dom";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import CartScreen from "./screens/CartScreen";
@@ -6,6 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import OrderScreen from "./screens/OrderScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import PrivateRoute from "./components/PrivateRoute";
 import ProductScreen from "./screens/ProductScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import PurchaseHistoryScreen from "./screens/PurchaseHistoryScreen";
@@ -74,9 +75,9 @@ function App() {
           <Route path="/shipping" component={ShippingAddressScreen} />
           <Route path="/payment" component={PaymentMethodScreen} />
           <Route path="/placeorder" component={PlaceOrderScreen} />
-          <Route path="/order/:id" component={OrderScreen} />
-          <Route path="/purchasehistory" component={PurchaseHistoryScreen} />
-          <Route path="/profile" component={ProfileScreen} />
+          <PrivateRoute path="/order/:id" component={OrderScreen} />
+          <PrivateRoute path="/purchasehistory" component={PurchaseHistoryScreen} />
+          <PrivateRoute path="/profile" component={ProfileScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
         <footer className="row center">All Rights Reserved</footer>
