@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Product from "../components/Product";
-import axios from "axios";
 import { listProducts } from "../actions/productActions";
 
 export default function HomeScreen() {
@@ -14,7 +13,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     dispatch(listProducts())
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       {loading ? (
