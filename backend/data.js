@@ -1,0 +1,87 @@
+import bcrypt from 'bcryptjs'
+
+const data = {
+  users: [
+    {
+      name:'Shay',
+      email:'admin@example.com',
+      password: bcrypt.hashSync('1234', 8),
+      isAdmin: true,
+    },
+    {
+      name:'Dan',
+      email:'Dan@gmail.com',
+      password: bcrypt.hashSync('1234', 8),
+      isAdmin: false,
+    }
+  ],
+    products: [
+      {
+        name: 'Ninja Professional 72 Oz Countertop Blender',
+        category: 'Kitchen',
+        image: '/images/p1.jpg',
+        price: 79,
+        countInStock: 10,
+        brand: 'Ninja',
+        rating: 4.5,
+        numReviews: 10,
+        description: 'high quality product',
+      },
+      {
+        name: 'Logitech G502 Lightspeed Wireless Gaming Mouse with',
+        category: 'Electronics',
+        image: '/images/p2.jpg',
+        price: 134,
+        countInStock: 20,
+        brand: 'Logitech',
+        rating: 4.0,
+        numReviews: 10,
+        description: 'high quality product',
+      },
+      {
+        name: 'Logitech G513 RGB Backlit Mechanical Gaming Keyboard',
+        category: 'Electronics',
+        image: '/images/p3.jpg',
+        price: 119,
+        countInStock: 0,
+        brand: 'Logitech',
+        rating: 4.8,
+        numReviews: 17,
+        description: 'high quality product',
+      },
+      {
+        name: 'Logitech G733 Lightspeed Wireless Gaming Headset with Suspension Headband',
+        category: 'Electronics',
+        image: '/images/p4.jpg',
+        price: 119,
+        countInStock: 15,
+        brand: 'Logitech',
+        rating: 4.5,
+        numReviews: 14,
+        description: 'high quality product',
+      },
+      {
+        name: 'Ninja Foodi AG301 5-in-1 Indoor',
+        category: 'Kitchen',
+        image: '/images/p5.jpg',
+        price: 179,
+        countInStock: 5,
+        brand: 'Ninja',
+        rating: 4.5,
+        numReviews: 10,
+        description: 'high quality product',
+      },
+      {
+        name: 'Ninja FG551 Foodi Smart XL 6-in-1 Indoor Grill',
+        category: 'Kitchen',
+        image: '/images/p6.jpg',
+        price: 229,
+        countInStock: 12,
+        brand: 'Ninja',
+        rating: 4.5,
+        numReviews: 15,
+        description: 'high quality product',
+      },
+    ],
+  };
+  export default data;
